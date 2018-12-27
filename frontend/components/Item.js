@@ -12,10 +12,12 @@ export default class Item extends Component {
     };
 
     render(){
-        const {Item} = this.props;
+        const {item} = this.props;
         return (
             <ItemStyles>
-                {item.image && <img src={item.image} alt={item.title} />}
+                {item.image && <img src={item.image} alt=
+                {item.title} />}
+
                 <Title>
                     <Link 
                         href={{
@@ -23,6 +25,7 @@ export default class Item extends Component {
                             query: {id: item.id},
                         }}
                     >
+                    
                         <a>{item.title}</a>
                     </Link>
                 </Title>
