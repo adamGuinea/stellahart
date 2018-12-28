@@ -27,7 +27,7 @@ const CREATE_ITEM_MUTATION = gql`
 `;
 
 class CreateItem extends Component {
-    state= {
+    state = {
         title: 'Vintage Cigar Box',
         description: 'delicious',
         image: 'cigar.jpeg',
@@ -36,13 +36,27 @@ class CreateItem extends Component {
     };
     handleChange = (e) => {
         const {name, type, value} = e.target;
-        const val = type === 'number' ? parseFloat(value) : 
-        value;
-        this.setState({[name]: val});
+        const val = type === 'number' ? parseFloat(value) : value;
+        this.setState({[name] : val});
     };
 
-    uploadFile = e => {
-        console.log('uploading file');
+     uploadFile = async e => {
+        console.log('uploading file...');
+        const files = e.target.files;
+        const data = new FormData();
+        data.append('file', files[0]);
+        data.append('upload_preset', 'stellahart');
+        const res = await fetch
+        ('https://api.cloudinary/v1_1/thelongwayhome/image/upload', {
+            method: 'POST',
+            body: data,
+        });
+        const file = await res.json();
+        console.log(file);
+        this.setState({
+            image: file.secure_url,
+            largeImage: file.eager[0].secure_url,
+        });
     };
 
     render() {
@@ -50,7 +64,8 @@ class CreateItem extends Component {
             <Mutation mutation={CREATE_ITEM_MUTATION} variables=
             {this.state}>
             {(createItem, {loading, error}) => (       
-                <Form onSubmit={async e => {
+                <Form 
+                    onSubmit={async e => {
                     e.preventDefault();
                     // call the mutation
                     const res = await createItem();
@@ -64,6 +79,7 @@ class CreateItem extends Component {
                 >
                     <Error error={error} />
                     <fieldset disabled={loading} aria-busy={loading}>
+
                         <label htmlFor="file">
                             Image
                             <input 
@@ -74,7 +90,11 @@ class CreateItem extends Component {
                                 required 
                                 onChange={this.uploadFile}
                             />
+                            {this.state.image && (
+                                <img width="200" src= {this.state.image} alt="Upload Preview" />
+                            )}
                         </label>
+
                         <label htmlFor="title">
                             Title
                             <input 
@@ -87,6 +107,7 @@ class CreateItem extends Component {
                                 onChange={this.handleChange}
                                 />
                         </label>
+
                         <label htmlFor="price">
                             Price
                             <input 
