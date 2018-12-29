@@ -718,7 +718,7 @@ Long can represent values between -(2^63) and 2^63 - 1.
 scalar Long
 
 type Mutation {
-  # createUser(data: UserCreateInput!): User!
+  createUser(data: UserCreateInput!): User!
   createCartItem(data: CartItemCreateInput!): CartItem!
   createItem(data: ItemCreateInput!): Item!
   createOrderItem(data: OrderItemCreateInput!): OrderItem!
