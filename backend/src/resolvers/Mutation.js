@@ -10,6 +10,11 @@ const Mutations = {
         const item = await ctx.db.mutation.createItem(
             {
                 data: {
+                    user: {
+                        connect: {
+                            id: ctx.request.userId,
+                        },
+                    },
                     ...args,
                 },
             }, 
@@ -108,7 +113,6 @@ const Mutations = {
             where: {email: args.email},
             data: {resetToken, resetTokenExpiry}
         });
-        console.log(res);
         return {message: 'Thanks!'};
         // 3. email user the reset token
     },
