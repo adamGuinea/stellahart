@@ -2,11 +2,13 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const {randomBytes} = require('crypto');
 const {promisify} = require('util');
+const {transport, makeANiceEmail} = require('../mail');
 
 const Mutations = {
     async createItem (parent, args, ctx, info) {
-        // TODO: check if they're logged in
-
+        if(!ctx.request.userId) {
+            throw new Error('You must be logged in!');
+        }
         const item = await ctx.db.mutation.createItem(
             {
                 data: {
@@ -113,8 +115,18 @@ const Mutations = {
             where: {email: args.email},
             data: {resetToken, resetTokenExpiry}
         });
-        return {message: 'Thanks!'};
         // 3. email user the reset token
+        const mailRes = await transport.sendMail({
+            from :'adamguinea22@gmail.com',
+            to: user.email,
+            subject: 'Your Password Reset Token',
+            html: makeANiceEmail(`Your Password Reset Token is Here! 
+            \n\n 
+            <a href="${process.env
+                .FRONTEND_URL}/reset?resetToken=${resetToken}
+                ">Click Here To Reset</a>`),
+        })
+        return {message: 'Thanks!'};
     },
     async resetPassword(parent, args, ctx, info) {
         // 1. check if the passwords match
@@ -126,7 +138,7 @@ const Mutations = {
         const [user] = await ctx.db.query.users({
             where: {
                 resetToken: args.resetToken,
-                resetTokenExpiry_gte: Date.now() - 3600000
+                resetTokenExpiry_gte: Date.now() - 3600000,
             },
         });
         if(!user) {
