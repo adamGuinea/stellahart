@@ -32,7 +32,7 @@ class CreateItem extends Component {
         description: 'delicious',
         image: 'cigar.jpeg',
         largeImage: 'biggerCigar.jpeg',
-        price: 0,
+        price: 1000,
     };
     handleChange = (e) => {
         const {name, type, value} = e.target;
@@ -46,8 +46,8 @@ class CreateItem extends Component {
         const data = new FormData();
         data.append('file', files[0]);
         data.append('upload_preset', 'stellahart');
-        const res = await fetch
-        ('https://api.cloudinary/v1_1/thelongwayhome/image/upload', {
+
+        const res = await fetch('https://api.cloudinary.com/v1_1/thelongwayhome/image/upload', {
             method: 'POST',
             body: data,
         });
@@ -61,21 +61,20 @@ class CreateItem extends Component {
 
     render() {
         return (
-            <Mutation mutation={CREATE_ITEM_MUTATION} variables=
-            {this.state}>
+            <Mutation mutation={CREATE_ITEM_MUTATION} variables={this.state}>
             {(createItem, {loading, error}) => (       
                 <Form 
                     onSubmit={async e => {
-                    e.preventDefault();
-                    // call the mutation
-                    const res = await createItem();
-                    // switch to single item page
-                    console.log(res);
-                    Router.push({
-                        pathname: '/item', 
-                        query: {id: res.data.createItem.id},
-                    });
-                }}
+                        e.preventDefault();
+                        // call the mutation
+                        const res = await createItem();
+                        // switch to single item page
+                        console.log(res);
+                        Router.push({
+                            pathname: '/item', 
+                            query: {id: res.data.createItem.id},
+                        });
+                    }}
                 >
                     <Error error={error} />
                     <fieldset disabled={loading} aria-busy={loading}>
@@ -105,7 +104,7 @@ class CreateItem extends Component {
                                 required 
                                 value={this.state.title}
                                 onChange={this.handleChange}
-                                />
+                            />
                         </label>
 
                         <label htmlFor="price">

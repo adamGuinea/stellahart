@@ -8,8 +8,8 @@ import Error from './ErrorMessage';
 import { consolidateStreamedStyles } from 'styled-components';
 
 const SINGLE_ITEM_QUERY = gql`
-    query SINGLE_ITEM_QUERY ($id: ID!){
-        item(where: {id: $id}){
+    query SINGLE_ITEM_QUERY($id: ID!) {
+        item(where: {id: $id}) {
             id
             title
             description
@@ -57,6 +57,7 @@ class UpdateItem extends Component {
                 ...this.state,
             },
         });
+        console.log('Updated!')
     };
 
     render() {
@@ -70,7 +71,7 @@ class UpdateItem extends Component {
                 {({data, loading}) => {
                     if(loading) return <p>Loading...</p>;
                     if(!data.item) return <p>No item found for ID 
-                    {this.props.id}</p>
+                    {this.props.id}</p>;
                     return (
                     <Mutation mutation={UPDATE_ITEM_MUTATION} 
                     variables={this.state}>
@@ -102,7 +103,7 @@ class UpdateItem extends Component {
                                         required 
                                         defaultValue={data.item.price}
                                         onChange={this.handleChange}
-                                        />
+                                    />
                                 </label>
                                     <label htmlFor="description">
                                         Description

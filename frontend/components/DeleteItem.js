@@ -31,11 +31,15 @@ class DeleteItem extends Component {
                 update={this.update}
             >
             {(deleteItem, {error}) => (
-                <button onClick={() => {
-                    if(confirm('Are you sure you want to delete this item?')) {
-                        deleteItem();
-                    }
-                }}>{this.props.children}</button>
+                <button 
+                    onClick={() => {
+                        if(confirm('Are you sure you want to delete this item?')) {
+                            deleteItem();
+                        }
+                    }}
+                >
+                    {this.props.children}
+                </button>
             )}
             </Mutation>
         );
