@@ -31,8 +31,8 @@ class Signin extends Component {
                 variables={this.state}
                 refetchQueries={[{query: CURRENT_USER_QUERY}]}
             >
-                {(signup, {error, loading}) => {
-                return (<Form 
+                {(signup, {error, loading}) => (
+                <Form 
                     method="post"
                     onSubmit={async e => {
                         e.preventDefault();
@@ -65,8 +65,8 @@ class Signin extends Component {
                         </label>
                         <button type="submit">Sign In!</button>
                     </fieldset>
-                </Form>)
-            }}
+                </Form>
+            )}
             </Mutation>
         );
     }
