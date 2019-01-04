@@ -47,9 +47,16 @@ const Mutations = {
     async deleteItem(parent, args, ctx, info){
         const where = { id: args.id };
         // 1, find the item
-        const item = await  ctx.db.query.item({where}, `{ id title}`);
+        const item = await ctx.db.query.item({where}, `{ id 
+        title user {id}}`);
         // 2. check if they own the item or have permissions
-       
+        const ownsItem = item.user.id === ctx.request.userId;
+        const hasPermissions = ctx.request.user.permissions.some
+        (permission => ['ADMIN', 'ITEMDELETE'].includes
+        (permission));
+        if(!ownsItem && !hasPermissions) {
+            throw new Error("You don't have permission to do that!");
+        }
         // 3. delete it
         return ctx.db.mutation.deleteItem({ where }, info);
     },
@@ -79,7 +86,7 @@ const Mutations = {
     },
     async signin(parent, {email, password}, ctx, info) {
         // 1. check if there is a user with that email
-        const user = await ctx.db.query.user({where: {email}});
+        const user = await ctx.db.query.user({where: { email } });
             if(!user) {
                 throw new Error(`No such user found for email ${email}`);
             }
@@ -198,6 +205,39 @@ const Mutations = {
             }, 
         info
         );
+    },
+    async addToCart(parent, args, ctx, info) {
+        // make sure they're signed in
+        const {userId} = ctx.request;
+        if(!userId) {
+            throw new Error("You've got to be signed in!")
+        }
+        // query the users current cart
+        const [existingCartItem] = await ctx.db.query.cartItems({
+            where: {
+                user: {id: userId},
+                item: {id: args.id},
+            }
+        });
+        // check if that item is already in their cart, if so increment 1
+        if(existingCartItem) {
+            console.log('This item is already in their cart');
+            return ctx.db.mutation.updateCartItem({
+                where: {id: existingCartItem.id},
+                data: {quantity: existingCartItem.quantity + 1}
+            }, info);
+        }
+        // create a new CartItem for user
+        return ctx.db.mutation.createCartItem({
+            data: {
+                user: {
+                    connect: {id: userId},
+                },
+                item: {
+                    connect: {id: args.id},
+                },
+            },
+        }, info);
     },
 };
 
