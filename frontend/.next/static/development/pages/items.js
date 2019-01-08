@@ -82,15 +82,18 @@ function (_React$Component) {
           lineNumber: 19
         },
         __self: this
-      }, function (addToCart) {
+      }, function (addToCart, _ref) {
+        var error = _ref.error,
+            loading = _ref.loading;
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          disabled: loading,
           onClick: addToCart,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 26
+            lineNumber: 27
           },
           __self: this
-        }, "Add To Cart");
+        }, "Add", loading && 'ing', " To Cart");
       });
     }
   }]);
@@ -30034,7 +30037,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 7:
+/***/ 3:
 /*!******************************!*\
   !*** multi ./pages/items.js ***!
   \******************************/
@@ -30059,5 +30062,5 @@ module.exports = dll_5d62d38be3592dca3a42;
 
 /***/ })
 
-},[[7,"static/runtime/webpack.js"]]]));;
+},[[3,"static/runtime/webpack.js"]]]));;
 //# sourceMappingURL=items.js.map

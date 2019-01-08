@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 7);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -175,15 +175,18 @@ function (_React$Component) {
           lineNumber: 19
         },
         __self: this
-      }, function (addToCart) {
+      }, function (addToCart, _ref) {
+        var error = _ref.error,
+            loading = _ref.loading;
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          disabled: loading,
           onClick: addToCart,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 26
+            lineNumber: 27
           },
           __self: this
-        }, "Add To Cart");
+        }, "Add", loading && 'ing', " To Cart");
       });
     }
   }]);
@@ -1064,7 +1067,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 7:
+/***/ 3:
 /*!******************************!*\
   !*** multi ./pages/items.js ***!
   \******************************/
