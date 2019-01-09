@@ -22,13 +22,35 @@ const Query = {
         if(!ctx.request.userId) {
             throw new Error('You must be logged in!')
         }
+        console.log(ctx.request.userId);
         // check if the user has the permissions to query users
-        hasPermission(ctx.request.user, ['ADMIN', 
-        'PERMISSIONUPDATE'])
+        hasPermission(ctx.request.user, ['ADMIN', 'PERMISSIONUPDATE'])
 
         // query all the users
         return ctx.db.query.users({}, info);
     },
+    async order(parent, args, ctx, info) {
+        // make sure they are logged in
+        if(!ctx.request.userId) {
+            throw new Error("You aren't logged in!");
+        }
+        // query the current users
+        const order = await ctx.db.query.order(
+            {
+                where: {id: args.id},
+            }, 
+            info
+        );
+        // check if they have permission to see this order
+        const ownsOrder = order.user.id === ctx.request.userId;
+        const hasPermissionToSeeOrder = 
+        ctx.request.user.permissions.includes("ADMIN");
+        if(!ownsOrder && !hasPermissionToSeeOrder) {
+            throw new Error("Sorry buddd you don't have permission");
+        }
+        // return the order
+        return order;
+    }
 };
 
 module.exports = Query;
