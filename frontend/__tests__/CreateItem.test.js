@@ -16,7 +16,7 @@ global.fetch = jest.fn().mockResolvedValue({
     }),
 });
 
-describe('<CreateItem />', () => {
+xdescribe('<CreateItem />', () => {
     it('renders and matches snapshot', () => {
         const wrapper = mount(
             <MockedProvider>
