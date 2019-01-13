@@ -35,7 +35,7 @@ const mocks = [
     }
 ];
 
-describe('<RemoveFromCart />', () => {
+xdescribe('<RemoveFromCart />', () => {
     it('renders and matches snapshot', async () => {
         const wrapper = mount(
             <MockedProvider>

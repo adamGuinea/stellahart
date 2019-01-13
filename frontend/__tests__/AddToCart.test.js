@@ -43,7 +43,7 @@ const mocks = [
     },
 ];
 
-describe('<AddToCart />', () => {
+xdescribe('<AddToCart />', () => {
     it('renders and matches the snapshot', async () => {
         const wrapper = mount(
             <MockedProvider mocks={mocks}>
