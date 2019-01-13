@@ -43,7 +43,7 @@ const mocks = [
     },
 ];
 
-describe('<Signup />', () => {
+xdescribe('<Signup />', () => {
     it('renders and matches snapshot', async () => {
         const wrapper = mount(
             <MockedProvider>
