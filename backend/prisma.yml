@@ -1,5 +1,7 @@
-endpoint: ${env:PRISMA_ENDPOINT}
+#endpoint: ${env:PRISMA_ENDPOINT}
+endpoint: https://stellahart-prod-d19fb32054.herokuapp.com/stellahart-prod/prod
 datamodel: datamodel.prisma
+secret: ${env:PRISMA_SECRET}
 hooks:
   post-deploy:
       - graphql get-schema -p prisma

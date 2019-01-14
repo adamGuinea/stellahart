@@ -1,5 +1,5 @@
-# source: https://us1.prisma.sh/adam-guinea-37cfb2/stellahart/dev
-# timestamp: Thu Jan 10 2019 02:55:17 GMT+1300 (New Zealand Daylight Time)
+# source: https://stellahart-prod-d19fb32054.herokuapp.com/stellahart-prod/prod
+# timestamp: Mon Jan 14 2019 13:04:45 GMT+1300 (New Zealand Daylight Time)
 
 type AggregateCartItem {
   count: Int!
@@ -261,7 +261,6 @@ input CartItemUpdateManyMutationInput {
 input CartItemUpdateManyWithoutUserInput {
   create: [CartItemCreateWithoutUserInput!]
   connect: [CartItemWhereUniqueInput!]
-  set: [CartItemWhereUniqueInput!]
   disconnect: [CartItemWhereUniqueInput!]
   delete: [CartItemWhereUniqueInput!]
   update: [CartItemUpdateWithWhereUniqueWithoutUserInput!]
@@ -1293,7 +1292,6 @@ input OrderItemUpdateManyDataInput {
 input OrderItemUpdateManyInput {
   create: [OrderItemCreateInput!]
   connect: [OrderItemWhereUniqueInput!]
-  set: [OrderItemWhereUniqueInput!]
   disconnect: [OrderItemWhereUniqueInput!]
   delete: [OrderItemWhereUniqueInput!]
   update: [OrderItemUpdateWithWhereUniqueNestedInput!]
