@@ -1,5 +1,6 @@
 # stellahart
-Online store with React and GraphQL, follow <a href="https://stellahart-next-prod.herokuapp.com/item?id=cjr8oc4t1003l0839ttv35raw">this link</a> to see. Sign in with email: 'user@gmail.com' password: 'user' to access account permissions and order history. Currently hosted on a free Heroku dyno which sleeps after 30mins, please be patient on initial load.
+
+Online store with React and GraphQL, follow <a href="https://stellahart-next.herokuapp.com/">this link</a> to see. Sign in with email: 'user@gmail.com' password: 'user' to access account permissions and order history. Currently hosted on a free Heroku dyno which sleeps after 30mins, please be patient on initial load.
 
 # <h2>Features</h2>
 
@@ -43,6 +44,3 @@ Online store with React and GraphQL, follow <a href="https://stellahart-next-pro
       <li>Providing a set of CRUD APIs for MySQL database</li>
     </ul>
   </li>
-
-
-
