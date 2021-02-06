@@ -1,11 +1,12 @@
 {
   "name": "sick-fits-frontend",
   "version": "2.0.0",
-  "description": "Sick Fits! An example React, GraphQL, Next and Apollo",
+  "description": "Stellahart",
   "main": "index.js",
   "scripts": {
     "dev": "next -p 7777",
     "build": "next build",
+    "lint": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
     "start": "next start -p 7777",
     "test": "NODE_ENV=test jest --watch"
   },
@@ -44,6 +45,7 @@
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.3.0",
     "@types/react": "^17.0.1",
+    "@types/react-router": "^5.1.11",
     "@types/styled-components": "^5.1.7",
     "@typescript-eslint/eslint-plugin": "^4.14.2",
     "babel-eslint": "^10.1.0",
