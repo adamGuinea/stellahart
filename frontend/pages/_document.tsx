@@ -1,12 +1,34 @@
-import Document, { Html, Head, NextScript, Main } from 'next/document';
+import Document, {
+  Html,
+  Head,
+  NextScript,
+  Main,
+  DocumentContext,
+  DocumentInitialProps,
+} from 'next/document';
+import { ServerStyleSheet } from 'styled-components';
 
+
+//@ts-ignore
 export default class MyDocument extends Document {
+  static getInitialProps({
+    renderPage,
+  }: DocumentContext) {
+    const sheet = new ServerStyleSheet();
+    const page = renderPage((App) => (props) =>
+      sheet.collectStyles(<App {...props} />)
+    );
+    const styleTags: Array<React.ReactElement<{}>> = sheet.getStyleElement();
+    return { ...page, styleTags };
+  }
   render() {
     return (
       <Html lang="en-US">
-        {/* <Head></Head> */}
-        <Main />
-        <NextScript />
+        <Head />
+        <body>
+          <Main />
+          <NextScript />
+        </body>
       </Html>
     );
   }
