@@ -5,6 +5,7 @@ import { User } from './schemas/User';
 import { Product } from './schemas/Products';
 import { ProductImage } from './schemas/ProductImage';
 import { withItemData, statelessSessions } from '@keystone-next/keystone/session';
+import { insertSeedData } from './seed-data';
 
 const databaseUrl = process.env.DATABASE_URL
 
@@ -32,7 +33,12 @@ export default withAuth(config({
 	},
 	db: {
 		adapter: 'mongoose',
-		url: databaseUrl
+		url: databaseUrl,
+		async onConnect(keystone) {
+			if(process.argv.includes('--seed-data')){
+				await insertSeedData(keystone)
+			}
+		}
 	},
 	lists: createSchema({
 		User,
