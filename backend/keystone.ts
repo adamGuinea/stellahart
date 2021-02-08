@@ -1,15 +1,29 @@
+import { createAuth } from '@keystone-next/auth';
 import { config, createSchema } from '@keystone-next/keystone/schema';
 import 'dotenv/config';
+import { User } from './schemas/User';
+import { Product } from './schemas/Products';
+import { ProductImage } from './schemas/ProductImage';
+import { withItemData, statelessSessions } from '@keystone-next/keystone/session';
 
-const databaseUrl = process.env.DATABASE_URL || 'mongo://localhost/stellahart'
+const databaseUrl = process.env.DATABASE_URL
 
 const sessionConfig = {
-	maxAge: 60 * 60 * 24 * 360,
-	secret: process.env.COOKIE_SECRET,
-
+	maxAge: 3600,
+	secret: process.env.COOKIE_SECRET
 }
 
-export default config({
+const { withAuth } = createAuth({
+	listKey: 'User',
+	identityField: 'email',
+	secretField: 'password',
+	initFirstItem: {
+		fields: ['name', 'email', 'password'],
+		// add initial roles later
+	}
+})
+
+export default withAuth(config({
 	server: {
 		cors: {
 			origin: [process.env.FRONTEND_URL],
@@ -18,15 +32,19 @@ export default config({
 	},
 	db: {
 		adapter: 'mongoose',
-		url: databaseUrl,
-		//add data seeding here later
+		url: databaseUrl
 	},
 	lists: createSchema({
-		//add schema items later
+		User,
+		Product,
+		ProductImage
 	}),
 	ui: {
-		//change this for roles later
-		isAccessAllowed: () => true,
-	}
-	// add session values later
-})
+		isAccessAllowed: ({ session }) => {
+			return !!session?.data
+		},
+	},
+	session: withItemData(statelessSessions(sessionConfig), {
+		User: `id`
+	})
+}))

@@ -1,4 +1,6 @@
-export const parserOptions = {
-	project: "./tsconfig.json",
-	sourceType: "module",
+module.exports = {
+  parserOptions: {
+    project: './tsconfig.json',
+  },
+  extends: ['airbnb-typescript'],
 };
