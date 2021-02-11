@@ -4,7 +4,6 @@ import Document, {
   NextScript,
   Main,
   DocumentContext,
-  DocumentInitialProps,
 } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 
@@ -23,7 +22,7 @@ export default class MyDocument extends Document {
   }
   render() {
     return (
-      <Html lang="en-US">
+      <Html lang="en-AU">
         <Head />
         <body>
           <Main />
