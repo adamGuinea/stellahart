@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Nav from './Nav';
 import styled from 'styled-components';
 
-const LogoStyles = styled.h1`
+const Logo = styled.h1`
   font-size: 4rem;
   margin-left: 2rem;
   position: relative;
@@ -24,7 +24,7 @@ const HeaderStyles = styled.header`
     display: grid;
     grid-template-columns: auto 1fr;
     justify-content: space-between;
-    align-items: center;
+    align-items: stretch;
   }
   .sub-bar {
     display: grid;
@@ -37,12 +37,12 @@ export default function Header() {
   return (
     <HeaderStyles>
       <div className="bar">
-        <LogoStyles>
+        <Logo>
           <Link href="/">Stellahart</Link>
-        </LogoStyles>
+        </Logo>
+        <Nav />
       </div>
       <div className="sub-bar">Search</div>
-      <Nav />
     </HeaderStyles>
   );
 }
