@@ -21,7 +21,7 @@ export default function Products() {
     <div>
       <ProductsListStyles>
         {data.allProducts.map((product: any) => (
-          <Product product={product} />
+          <Product key={product.id} product={product} />
         ))}
       </ProductsListStyles>
     </div>

@@ -1,5 +1,4 @@
-import { any } from 'prop-types';
-import { ChangeEvent, useState } from 'react';
+import { useState } from 'react';
 
 interface IFormInput {
   name: string;

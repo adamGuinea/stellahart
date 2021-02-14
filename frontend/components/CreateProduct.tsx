@@ -1,4 +1,5 @@
 import { useMutation } from '@apollo/client';
+import Router from 'next/router';
 import React from 'react';
 import useForm from '../lib/useForm';
 import { CREATE_PRODUCT_MUTATION } from '../mutations';
@@ -12,20 +13,23 @@ export default function CreateProduct() {
     price: 0,
   });
 
-  const [createProduct, { loading, error, data }] = useMutation(
+  const [createProduct, { loading, error }] = useMutation(
     CREATE_PRODUCT_MUTATION,
     {
       variables: inputs,
-      refetchQueries: [{query: ALL_PRODUCTS_QUERY}],
+      refetchQueries: [{ query: ALL_PRODUCTS_QUERY }],
     }
-  );
+  )
 
   return (
     <Form
       onSubmit={async (e) => {
         e.preventDefault();
-        await createProduct();
+        const result = await createProduct();
         clearForm();
+        Router.push({
+          pathname: `/product/${result.data.createProduct.id}`,
+        });
       }}
     >
       <DisplayError error={error} />
