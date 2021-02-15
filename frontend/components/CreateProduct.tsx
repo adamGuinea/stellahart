@@ -8,9 +8,11 @@ import DisplayError from './ErrorMessage';
 import Form from './styles/Form';
 
 export default function CreateProduct() {
-  const { inputs, handleChange, clearForm, resetForm } = useForm({
+  const { inputs, handleChange, clearForm } = useForm({
     name: '',
     price: 0,
+    image: '',
+    description: ''
   });
 
   const [createProduct, { loading, error }] = useMutation(

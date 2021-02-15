@@ -26,7 +26,7 @@ export default function Product({ product }: any) {
             },
           }}
         >
-          Edit{' '}
+          Edit
         </Link>
       </div>
     </ItemStyles>

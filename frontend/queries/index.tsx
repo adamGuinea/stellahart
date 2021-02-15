@@ -17,8 +17,8 @@ export const ALL_PRODUCTS_QUERY = gql`
   }
 `;
 
-export const SINGLE_ITEM_QUERY = gql`
-  query SINGLE_ITEM_QUERY($id: ID!) {
+export const SINGLE_PRODUCT_QUERY = gql`
+  query SINGLE_PRODUCT_QUERY($id: ID!) {
     Product(where: { id: $id }) {
       name
       price

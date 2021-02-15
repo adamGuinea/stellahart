@@ -5,6 +5,7 @@ interface IFormInput {
   price?: number;
   image?: string;
   description?: string;
+  id?: string;
 }
 
 export default function useForm(initial: IFormInput) {

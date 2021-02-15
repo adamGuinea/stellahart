@@ -23,3 +23,26 @@ export const CREATE_PRODUCT_MUTATION = gql`
     }
   }
 `;
+
+export const UPDATE_PRODUCT_MUTATION = gql`
+mutation UPDATE_PRODUCT_MUTATION(
+  $id: ID!
+  $name: String
+  $description: String
+  $price: Int
+){
+  updateProduct(
+    id: $id
+    data: {
+      price: $price
+      description: $description
+      name: $name
+    }
+  ) {
+    id
+    price
+    description
+    name
+  }
+}
+`;

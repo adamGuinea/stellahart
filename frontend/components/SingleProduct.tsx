@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/client';
 import Head from 'next/head';
 import React from 'react';
 import styled from 'styled-components';
-import { SINGLE_ITEM_QUERY } from '../queries';
+import { SINGLE_PRODUCT_QUERY } from '../queries';
 import DisplayError from './ErrorMessage';
 
 const ProductStyles = styled.div`
@@ -20,7 +20,7 @@ const ProductStyles = styled.div`
 `;
 
 export default function SingleProduct({ id }: any) {
-  const { data, loading, error } = useQuery(SINGLE_ITEM_QUERY, {
+  const { data, loading, error } = useQuery(SINGLE_PRODUCT_QUERY, {
     variables: { id: id },
   });
 
