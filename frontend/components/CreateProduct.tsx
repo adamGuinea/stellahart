@@ -11,8 +11,8 @@ export default function CreateProduct() {
   const { inputs, handleChange, clearForm } = useForm({
     name: '',
     price: 0,
-    image: '',
-    description: ''
+    photo: undefined,
+    description: '',
   });
 
   const [createProduct, { loading, error }] = useMutation(

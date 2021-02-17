@@ -7,3 +7,18 @@ export interface IChildren {
 export interface IPageProps {
 	query: string;
 }
+
+export interface IImage {
+	image: {
+		publicUrlTransformed: string
+	}
+}
+
+export interface IProduct {
+	name: string;
+	description: string;
+	price: number;
+	status: 'DRAFT' | 'AVAILABLE' | 'UNAVAILABLE';
+	photo: IImage;
+	id: string;
+}

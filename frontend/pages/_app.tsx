@@ -1,4 +1,4 @@
-import React, { Component, ComponentProps } from 'react';
+import React from 'react';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 import Router from 'next/router';
@@ -6,12 +6,14 @@ import { ApolloProvider } from '@apollo/client';
 import '../components/styles/nprogress.css';
 import Page from '../components/Page';
 import withData from '../lib/withData';
+import { AppProps } from 'next/dist/next-server/lib/router/router';
+import { AppContext } from 'next/app';
 
 Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', () => NProgress.done());
 Router.events.on('routeChangeError', () => NProgress.done());
 
-function MyApp({ Component, pageProps, apollo }) {
+function MyApp({ Component, pageProps, apollo }: AppProps) {
   return (
     <ApolloProvider client={apollo}>
       <Page>
@@ -21,7 +23,7 @@ function MyApp({ Component, pageProps, apollo }) {
   );
 }
 
-MyApp.getInitialProps = async function ({ Component, ctx }) {
+MyApp.getInitialProps = async function ({ Component, ctx }: AppContext) {
   let pageProps = {};
   if (Component.getInitialProps) {
     pageProps = await Component.getInitialProps(ctx);
@@ -31,4 +33,3 @@ MyApp.getInitialProps = async function ({ Component, ctx }) {
 };
 
 export default withData(MyApp);
-//mine

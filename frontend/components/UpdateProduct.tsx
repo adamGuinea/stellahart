@@ -1,12 +1,19 @@
 import { useMutation, useQuery } from '@apollo/client';
+import { NextApiRequest } from 'next';
 import React from 'react';
+import { IProduct } from '../interfaces';
 import useForm from '../lib/useForm';
 import { UPDATE_PRODUCT_MUTATION } from '../mutations';
 import { SINGLE_PRODUCT_QUERY } from '../queries';
 import DisplayError from './ErrorMessage';
 import Form from './styles/Form';
 
-export default function UpdateProduct({ id }: any) {
+interface IProps {
+  id: string
+}
+
+export default function UpdateProduct(props: IProps) {
+  const { id } = props;
   const { data, error, loading } = useQuery(SINGLE_PRODUCT_QUERY, {
     variables: { id },
   });

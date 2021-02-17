@@ -1,14 +1,8 @@
 import { useState } from 'react';
+import { IProduct } from '../interfaces';
 
-interface IFormInput {
-  name: string;
-  price?: number;
-  image?: string;
-  description?: string;
-  id?: string;
-}
 
-export default function useForm(initial: IFormInput) {
+export default function useForm(initial: Partial<IProduct>) {
   const [inputs, setInputs] = useState(initial);
 
   function handleChange(e: any) {
@@ -28,7 +22,7 @@ export default function useForm(initial: IFormInput) {
   }
 
   function clearForm() {
-    const blankState: any = Object.fromEntries(
+    const blankState = Object.fromEntries(
       Object.entries(inputs).map(([key, value]) => [key, ''])
     );
 

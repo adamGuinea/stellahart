@@ -4,8 +4,15 @@ import ItemStyles from './styles/ItemStyles';
 import Title from './styles/Title';
 import PriceTag from './styles/PriceTag';
 import { formatMoney } from '../lib/formatMoney';
+import { IProduct } from '../interfaces';
 
-export default function Product({ product }: any) {
+interface IProps {
+  product: IProduct;
+  key: string
+}
+
+export default function Product(props: IProps) {
+  const { product } = props;
   return (
     <ItemStyles>
       <img
