@@ -1,9 +1,16 @@
-import { useState } from 'react';
-import { IProduct } from '../interfaces';
+import { useEffect, useState } from 'react';
 
 
-export default function useForm(initial: Partial<IProduct>) {
+export default function useForm(
+  initial = { name: '', description: '', price: '' }
+) {
   const [inputs, setInputs] = useState(initial);
+
+  const initialValues = Object.values(initial).toString();
+
+  useEffect(() => {
+    setInputs(initial);
+  }, [initialValues]);
 
   function handleChange(e: any) {
     let { name, value, type } = e.target;

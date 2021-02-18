@@ -1,7 +1,5 @@
-import { useMutation, useQuery } from '@apollo/client';
-import { NextApiRequest } from 'next';
+import { gql, useMutation, useQuery } from '@apollo/client';
 import React from 'react';
-import { IProduct } from '../interfaces';
 import useForm from '../lib/useForm';
 import { UPDATE_PRODUCT_MUTATION } from '../mutations';
 import { SINGLE_PRODUCT_QUERY } from '../queries';
