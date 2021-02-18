@@ -25,24 +25,29 @@ export const CREATE_PRODUCT_MUTATION = gql`
 `;
 
 export const UPDATE_PRODUCT_MUTATION = gql`
-mutation UPDATE_PRODUCT_MUTATION(
-  $id: ID!
-  $name: String
-  $description: String
-  $price: Int
-){
-  updateProduct(
-    id: $id
-    data: {
-      price: $price
-      description: $description
-      name: $name
-    }
+  mutation UPDATE_PRODUCT_MUTATION(
+    $id: ID!
+    $name: String
+    $description: String
+    $price: Int
   ) {
-    id
-    price
-    description
-    name
+    updateProduct(
+      id: $id
+      data: { price: $price, description: $description, name: $name }
+    ) {
+      id
+      price
+      description
+      name
+    }
   }
-}
+`;
+
+export const DELETE_PRODUCT_MUTATION = gql`
+  mutation DELETE_PRODUCT_MUTATION($id: ID!) {
+    deleteProduct(id: $id) {
+      id
+      name
+    }
+  }
 `;
