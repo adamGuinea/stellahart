@@ -19,7 +19,7 @@ const Item = styled.div`
     padding: 0 3rem;
     font-size: 1.5rem;
   }
-  .buttonList {
+  .button-list {
     display: grid;
     width: 100%;
     border-top: 1px solid var(--lightGray);

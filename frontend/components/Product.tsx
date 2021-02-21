@@ -3,13 +3,13 @@ import React from 'react';
 import ItemStyles from './styles/ItemStyles';
 import Title from './styles/Title';
 import PriceTag from './styles/PriceTag';
-import { formatMoney } from '../lib/formatMoney';
+import { formatMoney } from '../lib/formatMoney.ts';
 import { IProduct } from '../interfaces';
 import DeleteProduct from './DeleteProduct';
 
 interface IProps {
   product: IProduct;
-  key: string
+  key: string;
 }
 
 export default function Product(props: IProps) {
@@ -34,9 +34,9 @@ export default function Product(props: IProps) {
             },
           }}
         >
-          Edit
+          Edit ✏
         </Link>
-        <DeleteProduct id={product.id}>Delete</DeleteProduct>
+        <DeleteProduct id={product.id}>Delete 🗑</DeleteProduct>
       </div>
     </ItemStyles>
   );

@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/client';
 import React from 'react';
 import styled from 'styled-components';
+import { perPage } from '../config';
 import { IProduct } from '../interfaces';
 import { ALL_PRODUCTS_QUERY } from '../queries';
 import Product from './Product';
@@ -12,8 +13,13 @@ const ProductsListStyles = styled.div`
   grid-gap: 60px;
 `;
 
-export default function Products() {
-  const { data, error, loading } = useQuery(ALL_PRODUCTS_QUERY);
+export default function Products({ page }) {
+  const { data, error, loading } = useQuery(ALL_PRODUCTS_QUERY, {
+    variables: {
+      skip: page * perPage - perPage,
+      first: perPage
+    }
+  });
   if (loading) return <div className="loading">loading</div>;
   if (error) return <div className="error">{error.message}</div>;
 

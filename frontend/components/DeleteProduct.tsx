@@ -1,14 +1,15 @@
-import { ApolloCache, BaseMutationOptions, useMutation } from '@apollo/client';
-import { IPageProps, IProduct } from '../interfaces';
+import { ApolloCache, FetchResult, InMemoryCache, MutationFunctionOptions, MutationUpdaterFn, NormalizedCacheObject, useMutation } from '@apollo/client';
+import { NextApiResponse } from 'next';
+import React from 'react';
 import { DELETE_PRODUCT_MUTATION } from '../mutations';
 
 interface IProps {
-  children: React.HTMLProps<HTMLButtonElement>;
-  id: string;
+  children: string;
+  id: MutationFunctionOptions<NormalizedCacheObject, { id: string; }>;
 }
 
-function update<T>(cache, payload) {
-  cache.evict(cache.identify(payload.data.deleteProduct));
+const update: MutationUpdaterFn<T> = (cache: ApolloCache<T>, payload: FetchResult<T>):void => {
+	cache.evict(cache.identify(payload.data.deleteProduct));
 }
 
 export default function DeleteProduct(props: IProps) {
@@ -26,12 +27,12 @@ export default function DeleteProduct(props: IProps) {
   return (
     <button
       disabled={loading}
+			type="button"
       onClick={() => {
         if (confirm('Are you sure?')) {
           deleteProduct(id).catch((err) => alert(err.message));
         }
       }}
-      type="button"
     >
       {children}
     </button>
