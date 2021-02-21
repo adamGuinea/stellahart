@@ -41,3 +41,16 @@ export const PAGINATION_QUERY = gql`
     }
   }
 `;
+
+export const CURRENT_USER_QUERY = gql`
+ query {
+   authenticatedItem {
+     ... on User {
+       id
+       email
+       name
+      #  query the cart later
+     }
+   }
+ }
+`;

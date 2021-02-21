@@ -5,7 +5,7 @@ import Router from 'next/router';
 import { ApolloProvider } from '@apollo/client';
 import '../components/styles/nprogress.css';
 import Page from '../components/Page';
-import withData from '../lib/withData.ts';
+import withData from '../lib/withData';
 import { AppProps } from 'next/dist/next-server/lib/router/router';
 import { AppContext } from 'next/app';
 

@@ -3,7 +3,7 @@ import React from 'react';
 import ItemStyles from './styles/ItemStyles';
 import Title from './styles/Title';
 import PriceTag from './styles/PriceTag';
-import { formatMoney } from '../lib/formatMoney.ts';
+import { formatMoney } from '../lib/formatMoney';
 import { IProduct } from '../interfaces';
 import DeleteProduct from './DeleteProduct';
 
