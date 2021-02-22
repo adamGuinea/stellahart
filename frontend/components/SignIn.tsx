@@ -29,8 +29,6 @@ export default function SignIn() {
       ? data?.authenticateUserWithPassword
       : undefined;
 
-
-			console.log('error', error)
   return (
     <Form method="POST" onSubmit={handleSubmit}>
       <h2>Sign Into Your Account</h2>
