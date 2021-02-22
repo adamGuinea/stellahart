@@ -69,8 +69,23 @@ export const SIGN_IN_MUTATION = gql`
     }
   }
 `;
+
 export const SIGN_OUT_MUTATION = gql`
   mutation {
     endSession
+  }
+`;
+
+export const SIGN_UP_MUTATION = gql`
+  mutation SIGN_UP_MUTATION(
+    $email: String!
+    $name: String!
+    $password: String!
+  ) {
+    createUser(data: { email: $email, name: $name, password: $password }) {
+      id
+      name
+      email
+    }
   }
 `;
