@@ -6,7 +6,8 @@ export default function useForm(
     description: '',
     price: '',
     email: '',
-    password: ''
+    password: '',
+    token: ''
   }
 ) {
   const [inputs, setInputs] = useState(initial);

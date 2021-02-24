@@ -89,3 +89,25 @@ export const SIGN_UP_MUTATION = gql`
     }
   }
 `;
+
+export const REQUEST_RESET_MUTATION = gql`
+  mutation REQUEST_RESET_MUTATION($email: String!) {
+    sendUserPasswordResetLink(email: $email) {
+      code
+      message
+    }
+  }
+`;
+
+export const RESET_MUTATION = gql`
+  mutation RESET_MUTATION($email: String!, $password: String!, $token: String!) {
+    redeemUserPasswordResetToken(
+      email: $email
+      token: $token
+      password: $password
+    ) {
+      code
+      message
+    }
+  }
+`;
