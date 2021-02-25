@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/client';
-import React from 'react';
+import React, { FormEvent } from 'react';
 import useForm from '../lib/useForm';
 import { RESET_MUTATION } from '../mutations';
 import DisplayError from './ErrorMessage';
@@ -20,7 +20,7 @@ export default function Reset({token}) {
     ? data?.redeemUserPasswordResetToken
     : undefined;
 
-  async function handleSubmit(e) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     await reset().catch((error) => console.error(error));
     resetForm();

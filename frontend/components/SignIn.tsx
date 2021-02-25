@@ -1,5 +1,5 @@
+import React, { FormEvent } from 'react';
 import { useMutation } from '@apollo/client';
-import React from 'react';
 import useForm from '../lib/useForm';
 import { SIGN_IN_MUTATION } from '../mutations';
 import { CURRENT_USER_QUERY } from '../queries';
@@ -17,7 +17,7 @@ export default function SignIn() {
     refetchQueries: [{ query: CURRENT_USER_QUERY }],
   });
 
-  async function handleSubmit(e) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     await signin();
     resetForm();

@@ -5,10 +5,10 @@ import { DELETE_PRODUCT_MUTATION } from '../mutations';
 
 interface IProps {
   children: string;
-  id: MutationFunctionOptions<NormalizedCacheObject, { id: string; }>;
+  id: string;
 }
 
-const update: MutationUpdaterFn<T> = (cache: ApolloCache<T>, payload: FetchResult<T>):void => {
+const update: MutationUpdaterFn = (cache: ApolloCache<any>, payload: FetchResult): void => {
 	cache.evict(cache.identify(payload.data.deleteProduct));
 }
 

@@ -2,8 +2,16 @@ import React from 'react';
 import RequestReset from '../components/RequestReset';
 import Reset from '../components/Reset';
 
-export default function ResetPage({ query }) {
-  if (!query?.token) {
+type Token = {
+	token: string;
+}
+interface QueryParams extends Request {
+	query: Token;
+}
+
+export default function ResetPage(request: QueryParams) {
+	const { query } = request;
+  if (!request.query?.token) {
     return (
       <div>
         <p>Sorry, you need a token to be here</p>

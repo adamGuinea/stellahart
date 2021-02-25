@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 
 export default function useForm(
   initial = {
@@ -18,7 +18,7 @@ export default function useForm(
     setInputs(initial);
   }, [initialValues]);
 
-  function handleChange(e: any) {
+  function handleChange(e: ChangeEvent<HTMLFormElement>) {
     let { name, value, type } = e.target;
 
     if (type === 'number') {

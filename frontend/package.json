@@ -8,7 +8,8 @@
     "build": "next build",
     "lint": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
     "start": "next start -p 7777",
-    "test": "NODE_ENV=test jest --watch"
+    "test": "NODE_ENV=test jest --watch",
+    "codegen": "graphql-codegen --config codegen.yml"
   },
   "author": "",
   "license": "ISC",
@@ -41,6 +42,11 @@
     "@apollo/react-testing": "^4.0.0",
     "@babel/core": "^7.12.9",
     "@babel/preset-env": "^7.12.7",
+    "@graphql-codegen/cli": "1.20.1",
+    "@graphql-codegen/introspection": "1.18.1",
+    "@graphql-codegen/typescript": "1.21.0",
+    "@graphql-codegen/typescript-operations": "1.17.14",
+    "@graphql-codegen/typescript-react-apollo": "2.2.1",
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.3.0",
