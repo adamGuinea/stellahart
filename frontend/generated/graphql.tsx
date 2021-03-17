@@ -16,6 +16,13 @@ export type Scalars = {
   Upload: any;
 };
 
+export type CartItemRelateToManyInput = {
+  create?: Maybe<Array<Maybe<CartItemCreateInput>>>;
+  connect?: Maybe<Array<Maybe<CartItemWhereUniqueInput>>>;
+  disconnect?: Maybe<Array<Maybe<CartItemWhereUniqueInput>>>;
+  disconnectAll?: Maybe<Scalars['Boolean']>;
+};
+
 /**  A keystone list  */
 export type User = {
   __typename?: 'User';
@@ -23,12 +30,36 @@ export type User = {
   name?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
   password_is_set?: Maybe<Scalars['Boolean']>;
+  cart: Array<CartItem>;
+  _cartMeta?: Maybe<_QueryMeta>;
   passwordResetToken_is_set?: Maybe<Scalars['Boolean']>;
   passwordResetIssuedAt?: Maybe<Scalars['String']>;
   passwordResetRedeemedAt?: Maybe<Scalars['String']>;
   magicAuthToken_is_set?: Maybe<Scalars['Boolean']>;
   magicAuthIssuedAt?: Maybe<Scalars['String']>;
   magicAuthRedeemedAt?: Maybe<Scalars['String']>;
+};
+
+
+/**  A keystone list  */
+export type UserCartArgs = {
+  where?: Maybe<CartItemWhereInput>;
+  search?: Maybe<Scalars['String']>;
+  sortBy?: Maybe<Array<SortCartItemsBy>>;
+  orderBy?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  skip?: Maybe<Scalars['Int']>;
+};
+
+
+/**  A keystone list  */
+export type User_CartMetaArgs = {
+  where?: Maybe<CartItemWhereInput>;
+  search?: Maybe<Scalars['String']>;
+  sortBy?: Maybe<Array<SortCartItemsBy>>;
+  orderBy?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  skip?: Maybe<Scalars['Int']>;
 };
 
 export type UserWhereInput = {
@@ -75,6 +106,12 @@ export type UserWhereInput = {
   email_in?: Maybe<Array<Maybe<Scalars['String']>>>;
   email_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
   password_is_set?: Maybe<Scalars['Boolean']>;
+  /**  condition must be true for all nodes  */
+  cart_every?: Maybe<CartItemWhereInput>;
+  /**  condition must be true for at least 1 node  */
+  cart_some?: Maybe<CartItemWhereInput>;
+  /**  condition must be false for all nodes  */
+  cart_none?: Maybe<CartItemWhereInput>;
   passwordResetToken_is_set?: Maybe<Scalars['Boolean']>;
   passwordResetIssuedAt?: Maybe<Scalars['String']>;
   passwordResetIssuedAt_not?: Maybe<Scalars['String']>;
@@ -122,6 +159,8 @@ export enum SortUsersBy {
   NameDesc = 'name_DESC',
   EmailAsc = 'email_ASC',
   EmailDesc = 'email_DESC',
+  CartAsc = 'cart_ASC',
+  CartDesc = 'cart_DESC',
   PasswordResetIssuedAtAsc = 'passwordResetIssuedAt_ASC',
   PasswordResetIssuedAtDesc = 'passwordResetIssuedAt_DESC',
   PasswordResetRedeemedAtAsc = 'passwordResetRedeemedAt_ASC',
@@ -136,6 +175,7 @@ export type UserUpdateInput = {
   name?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
   password?: Maybe<Scalars['String']>;
+  cart?: Maybe<CartItemRelateToManyInput>;
   passwordResetToken?: Maybe<Scalars['String']>;
   passwordResetIssuedAt?: Maybe<Scalars['String']>;
   passwordResetRedeemedAt?: Maybe<Scalars['String']>;
@@ -153,6 +193,7 @@ export type UserCreateInput = {
   name?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
   password?: Maybe<Scalars['String']>;
+  cart?: Maybe<CartItemRelateToManyInput>;
   passwordResetToken?: Maybe<Scalars['String']>;
   passwordResetIssuedAt?: Maybe<Scalars['String']>;
   passwordResetRedeemedAt?: Maybe<Scalars['String']>;
@@ -437,6 +478,79 @@ export type ProductImagesCreateInput = {
   data?: Maybe<ProductImageCreateInput>;
 };
 
+export type UserRelateToOneInput = {
+  create?: Maybe<UserCreateInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
+  disconnect?: Maybe<UserWhereUniqueInput>;
+  disconnectAll?: Maybe<Scalars['Boolean']>;
+};
+
+/**  A keystone list  */
+export type CartItem = {
+  __typename?: 'CartItem';
+  id: Scalars['ID'];
+  quantity?: Maybe<Scalars['Int']>;
+  product?: Maybe<Product>;
+  user?: Maybe<User>;
+};
+
+export type CartItemWhereInput = {
+  AND?: Maybe<Array<Maybe<CartItemWhereInput>>>;
+  OR?: Maybe<Array<Maybe<CartItemWhereInput>>>;
+  id?: Maybe<Scalars['ID']>;
+  id_not?: Maybe<Scalars['ID']>;
+  id_in?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  id_not_in?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  quantity?: Maybe<Scalars['Int']>;
+  quantity_not?: Maybe<Scalars['Int']>;
+  quantity_lt?: Maybe<Scalars['Int']>;
+  quantity_lte?: Maybe<Scalars['Int']>;
+  quantity_gt?: Maybe<Scalars['Int']>;
+  quantity_gte?: Maybe<Scalars['Int']>;
+  quantity_in?: Maybe<Array<Maybe<Scalars['Int']>>>;
+  quantity_not_in?: Maybe<Array<Maybe<Scalars['Int']>>>;
+  product?: Maybe<ProductWhereInput>;
+  product_is_null?: Maybe<Scalars['Boolean']>;
+  user?: Maybe<UserWhereInput>;
+  user_is_null?: Maybe<Scalars['Boolean']>;
+};
+
+export type CartItemWhereUniqueInput = {
+  id: Scalars['ID'];
+};
+
+export enum SortCartItemsBy {
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC',
+  QuantityAsc = 'quantity_ASC',
+  QuantityDesc = 'quantity_DESC',
+  ProductAsc = 'product_ASC',
+  ProductDesc = 'product_DESC',
+  UserAsc = 'user_ASC',
+  UserDesc = 'user_DESC'
+}
+
+export type CartItemUpdateInput = {
+  quantity?: Maybe<Scalars['Int']>;
+  product?: Maybe<ProductRelateToOneInput>;
+  user?: Maybe<UserRelateToOneInput>;
+};
+
+export type CartItemsUpdateInput = {
+  id: Scalars['ID'];
+  data?: Maybe<CartItemUpdateInput>;
+};
+
+export type CartItemCreateInput = {
+  quantity?: Maybe<Scalars['Int']>;
+  product?: Maybe<ProductRelateToOneInput>;
+  user?: Maybe<UserRelateToOneInput>;
+};
+
+export type CartItemsCreateInput = {
+  data?: Maybe<CartItemCreateInput>;
+};
+
 
 export type _ListAccess = {
   __typename?: '_ListAccess';
@@ -626,6 +740,14 @@ export type Query = {
   _allProductImagesMeta?: Maybe<_QueryMeta>;
   /**  Retrieve the meta-data for the ProductImage list.  */
   _ProductImagesMeta?: Maybe<_ListMeta>;
+  /**  Search for all CartItem items which match the where clause.  */
+  allCartItems?: Maybe<Array<Maybe<CartItem>>>;
+  /**  Search for the CartItem item with the matching ID.  */
+  CartItem?: Maybe<CartItem>;
+  /**  Perform a meta-query on all CartItem items which match the where clause.  */
+  _allCartItemsMeta?: Maybe<_QueryMeta>;
+  /**  Retrieve the meta-data for the CartItem list.  */
+  _CartItemsMeta?: Maybe<_ListMeta>;
   /**  Retrieve the meta-data for all lists.  */
   _ksListsMeta?: Maybe<Array<Maybe<_ListMeta>>>;
   /** The version of the Keystone application serving this API. */
@@ -711,6 +833,31 @@ export type Query_AllProductImagesMetaArgs = {
 };
 
 
+export type QueryAllCartItemsArgs = {
+  where?: Maybe<CartItemWhereInput>;
+  search?: Maybe<Scalars['String']>;
+  sortBy?: Maybe<Array<SortCartItemsBy>>;
+  orderBy?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  skip?: Maybe<Scalars['Int']>;
+};
+
+
+export type QueryCartItemArgs = {
+  where: CartItemWhereUniqueInput;
+};
+
+
+export type Query_AllCartItemsMetaArgs = {
+  where?: Maybe<CartItemWhereInput>;
+  search?: Maybe<Scalars['String']>;
+  sortBy?: Maybe<Array<SortCartItemsBy>>;
+  orderBy?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  skip?: Maybe<Scalars['Int']>;
+};
+
+
 export type Query_KsListsMetaArgs = {
   where?: Maybe<_KsListsMetaInput>;
 };
@@ -759,6 +906,18 @@ export type Mutation = {
   deleteProductImage?: Maybe<ProductImage>;
   /**  Delete multiple ProductImage items by ID.  */
   deleteProductImages?: Maybe<Array<Maybe<ProductImage>>>;
+  /**  Create a single CartItem item.  */
+  createCartItem?: Maybe<CartItem>;
+  /**  Create multiple CartItem items.  */
+  createCartItems?: Maybe<Array<Maybe<CartItem>>>;
+  /**  Update a single CartItem item by ID.  */
+  updateCartItem?: Maybe<CartItem>;
+  /**  Update multiple CartItem items by ID.  */
+  updateCartItems?: Maybe<Array<Maybe<CartItem>>>;
+  /**  Delete a single CartItem item by ID.  */
+  deleteCartItem?: Maybe<CartItem>;
+  /**  Delete multiple CartItem items by ID.  */
+  deleteCartItems?: Maybe<Array<Maybe<CartItem>>>;
   authenticateUserWithPassword: UserAuthenticationWithPasswordResult;
   createInitialUser: UserAuthenticationWithPasswordSuccess;
   sendUserPasswordResetLink?: Maybe<SendUserPasswordResetLinkResult>;
@@ -856,6 +1015,37 @@ export type MutationDeleteProductImageArgs = {
 
 
 export type MutationDeleteProductImagesArgs = {
+  ids?: Maybe<Array<Scalars['ID']>>;
+};
+
+
+export type MutationCreateCartItemArgs = {
+  data?: Maybe<CartItemCreateInput>;
+};
+
+
+export type MutationCreateCartItemsArgs = {
+  data?: Maybe<Array<Maybe<CartItemsCreateInput>>>;
+};
+
+
+export type MutationUpdateCartItemArgs = {
+  id: Scalars['ID'];
+  data?: Maybe<CartItemUpdateInput>;
+};
+
+
+export type MutationUpdateCartItemsArgs = {
+  data?: Maybe<Array<Maybe<CartItemsUpdateInput>>>;
+};
+
+
+export type MutationDeleteCartItemArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type MutationDeleteCartItemsArgs = {
   ids?: Maybe<Array<Scalars['ID']>>;
 };
 
