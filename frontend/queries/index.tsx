@@ -43,14 +43,28 @@ export const PAGINATION_QUERY = gql`
 `;
 
 export const CURRENT_USER_QUERY = gql`
- query {
-   authenticatedItem {
-     ... on User {
-       id
-       email
-       name
-      #  query the cart later
-     }
-   }
- }
+  query {
+    authenticatedItem {
+      ... on User {
+        id
+        email
+        name
+        cart {
+          id
+          quantity
+          product {
+            id
+            price
+            photo {
+              image {
+                publicUrlTransformed
+              }
+            }
+            name
+            description
+          }
+        }
+      }
+    }
+  }
 `;
