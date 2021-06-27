@@ -4,6 +4,9 @@ export interface IChildren {
 	children: ReactNode;
 }
 
+export interface IAddToCartProps {
+	id: string;
+}
 export interface IPageProps {
 	query: string;
 }

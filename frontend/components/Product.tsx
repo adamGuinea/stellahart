@@ -6,6 +6,7 @@ import PriceTag from './styles/PriceTag';
 import { formatMoney } from '../lib/formatMoney';
 import { IProduct } from '../interfaces';
 import DeleteProduct from './DeleteProduct';
+import AddToCart from './AddToCart';
 
 interface IProps {
   product: IProduct;
@@ -36,6 +37,7 @@ export default function Product(props: IProps) {
         >
           Edit ✏
         </Link>
+        <AddToCart id={product.id} />
         <DeleteProduct id={product.id}>Delete 🗑</DeleteProduct>
       </div>
     </ItemStyles>

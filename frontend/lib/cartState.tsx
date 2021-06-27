@@ -1,9 +1,16 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, ReactNode, useContext, useState } from 'react';
 
-const LocalStateContext = createContext();
+type IProps = {
+  children: ReactNode
+}
+const LocalStateContext = createContext({
+  openCart: () => {},
+  closeCart: () => {},
+  toggleCart: () => {},
+});
 const LocalStateProvider = LocalStateContext.Provider;
 
-function CartStateProvider({ children }) {
+function CartStateProvider({ children }: IProps) {
   const [cartOpen, setCartOpen] = useState(false);
 
   function toggleCart() {
@@ -11,15 +18,15 @@ function CartStateProvider({ children }) {
   }
 
   function openCart() {
-    setCartOpen(true);
+    return setCartOpen(true);
   }
 
   function closeCart() {
-    setCartOpen(false);
+    return setCartOpen(false);
   }
 
   return (
-    <LocalStateProvider value={{ cartOpen, toggleCart, openCart, closeCart }}>
+    <LocalStateProvider value={{ toggleCart, openCart, closeCart, cartOpen }}>
       {children}
     </LocalStateProvider>
   );

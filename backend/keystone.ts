@@ -8,6 +8,7 @@ import { ProductImage } from './schemas/ProductImage';
 import { withItemData, statelessSessions } from '@keystone-next/keystone/session';
 import { insertSeedData } from './seed-data';
 import { sendPassowrdResetEmail } from './lib/mail';
+import { extendGraphqlSchema } from './mutations';
 
 const databaseUrl = process.env.DATABASE_URL
 
@@ -53,6 +54,7 @@ export default withAuth(config({
 		ProductImage,
 		CartItem
 	}),
+	extendGraphqlSchema,
 	ui: {
 		isAccessAllowed: ({ session }) => {
 			return !!session?.data
